@@ -42,4 +42,3 @@ def get_file_info(path: Path) -> FileInfo:
         modified_at=datetime.fromtimestamp(stat.st_mtime),
         metadata=metadata,
     )
-
