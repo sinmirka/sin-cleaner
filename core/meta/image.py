@@ -16,7 +16,11 @@ def get_image_metadata(path: Path) -> dict:
     return exif_dict
 
 
-def clean_image_metadata(path: Path, *, dry_run: bool = False) -> list[str]:
+def clean_image_metadata(
+        path: Path,
+        *,
+        dry_run: bool = False
+    ) -> list[str]:
     meta = get_image_metadata(path)
 
     if not meta:
@@ -31,6 +35,7 @@ def clean_image_metadata(path: Path, *, dry_run: bool = False) -> list[str]:
             report.append(f"{section}: {len(data)} tags")
 
     if dry_run:
+        report.append(f"Dry-run enabled, no changes were applied")
         return report
     
     image = Image.open(path)
