@@ -1,3 +1,6 @@
+# currently scrapped part of the app.
+
+"""
 import typer
 from pathlib import Path
 import sys
@@ -32,3 +35,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
