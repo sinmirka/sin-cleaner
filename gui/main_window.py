@@ -44,7 +44,8 @@ class MainWindow(QMainWindow):
 
         # Metadata tab
         self.ui.btnClearMetadata.clicked.connect(self.choose_file)
-        
+        self.ui.btnOpenMetadataFull.clicked.connect(self.open_metadata_full)
+
 
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
@@ -72,3 +73,44 @@ class MainWindow(QMainWindow):
             return
         
         self.ui.textInfo.setPlainText("\n".join(report))
+
+    def clear_metadata(self):
+        if not self.current_file:
+            QMessageBox.warning(self, "Error", "No file selected")
+            return
+
+        try:
+            report = clean_image_metadata(self.current_file)
+        except Exception as e:
+            QMessageBox.critical(self, "Metadata error", str(e))
+            return
+
+        self.ui.textMetadata.setPlainText("\n".join(report))
+
+    def open_metadata_full(self):
+        if not self.current_file:
+            QMessageBox.warning(self, "Error", "No file selected")
+            return
+
+        try:
+            metadata = get_image_metadata(self.current_file)
+        except Exception as e:
+            QMessageBox.critical(self, "Metadata error", str(e))
+            return
+
+        if not metadata:
+            self.ui.textMetadata.setPlainText("No metadata found.")
+            return
+
+        lines: list[str] = []
+
+        for section, data in metadata.items():
+            lines.append(f"[{section}]")
+            if isinstance(data, dict):
+                for tag, value in data.items():
+                    lines.append(f"{tag}: {value}")
+            else:
+                lines.append(str(data))
+            lines.append("")
+
+        self.ui.textMetadata.setPlainText("\n".join(lines))
