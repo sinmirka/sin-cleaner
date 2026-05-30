@@ -7,12 +7,12 @@
 ![Architecture](https://img.shields.io/badge/architecture-layered-blueviolet)
 ![Local-only](https://img.shields.io/badge/data-local--only-success)
 
-# 🫧 SinTweaker
+# 🫧 SinImager
 
-### SinTweaker (formerly SinCleaner) is a lightweight desktop toolkit for image and file operations.
+### SinImager (formerly SinCleaner) is a lightweight desktop toolkit for image and file operations.
 Built with Python + PySide6.
 
-SinTweaker focuses on simplicity, predictability, and local-only processing.  
+SinImager focuses on simplicity, predictability, and local-only processing.  
 It provides a small set of practical tools for working with images and files without unnecessary complexity.
 
 ---
